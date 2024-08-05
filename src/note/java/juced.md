@@ -194,8 +194,9 @@ volatile关键字有两个作用，保证可见性和有序性，但是不保证
 ## 使用场景及原理
 
 1. **使用场景**：
-   1. `volatile` 适用于状态标记，例如，一个线程需要知道另一个线程是否已经初始化了某些资源或者是否正在执行特定的任务。
-
+   
+1. `volatile` 适用于状态标记，例如，一个线程需要知道另一个线程是否已经初始化了某些资源或者是否正在执行特定的任务。
+   
 1. **示例**：
    1. ```Java
       public class Example {
@@ -216,6 +217,7 @@ volatile关键字有两个作用，保证可见性和有序性，但是不保证
    2.   在这个例子中，`running` 变量被声明为 `volatile`，以确保当调用 `stop()` 方法修改 `running` 为 `false` 时，`start()` 方法中的线程能够立即看到这个变化。
 
 1. **内存****屏障**：
+   
    1. 在读取 `volatile` 变量时，JVM 会插入一个内存屏障来防止指令重排序，确保在该屏障之前的所有读/写操作在该屏障之后的所有读/写操作之前执行。
 
  `volatile` 是一种比 `synchronized` 更轻量级的同步机制，但它的使用场景有限，主要用于保证变量的可见性。在需要更复杂的同步操作时，通常需要使用其他同步机制，如 `synchronized` 或 `java.util.concurrent` 包中的并发工具。
@@ -373,16 +375,16 @@ public static void m3() {
 |--------------------------------------------------------------------|--------------------|
 ```
 
-#### 撤销 - 调用对象 hashCode
+#### 撤销 - 调用对象 hashCode - 升级为轻量级锁。
 
-调用了对象的 hashCode，但偏向锁的对象 MarkWord 中存储的是线程 id，如果调用 hashCode 会导致偏向锁被撤销
+调用了对象的 hashCode，但偏向锁的对象 MarkWord 中存储的是线程 id，如果调用 hashCode 会导致偏向锁被撤销，升级为轻量级锁。
 
 - 轻量级锁会在锁记录中记录 hashCode
 - 重量级锁会在 Monitor 中记录 hashCode
 
 在调用 hashCode 后使用偏向锁，记得去掉 -XX:-UseBiasedLocking
 
-#### 撤销 - 其它线程使用对象
+#### 撤销 - 其它线程使用对象 - 升级为轻量级锁
 
 当有其它线程使用偏向锁对象时，会将偏向锁升级为轻量级锁
 
@@ -432,7 +434,9 @@ private static void test2() throws InterruptedException {
 [t2] - 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 
 ```
 
-#### 撤销 - 调用 wait/notify
+#### 撤销 - 调用 wait/notify - 升级为重量级锁
+
+Object类里看到的wait() notify() 方法，其实是objectMonitor对象的方法。所以当你使用了wait() 或 notify() 后，必定会创建并进入重量级锁，这也是为什么这两个方法必须要放在synchronized代码块里的原因。
 
 ```Java
 public static void main(String[] args) throws InterruptedException {
