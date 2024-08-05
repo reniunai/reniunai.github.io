@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: go-简单使用elasticsearch
+title: B+树，索引，回表
 # 你可以自定义封面图片
 cover: /assets/images/cover1.jpg
 # 这是页面的图标
@@ -14,11 +14,13 @@ date: 2024-07-15
 # 一个页面可以有多个分类
 
 category:
-  - Go
+  - B+树，索引，回表
 # 一个页面可以有多个标签
 
 tag:
-  - elasticsearch
+  - B+树
+  - 索引
+  - 回表
 
 # 此页面会在文章列表置顶
 # sticky: false
