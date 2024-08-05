@@ -3,8 +3,14 @@ import { sidebar } from "vuepress-theme-hope";
 export default sidebar({
   // "/demo/":  "structure",
   "/note/java/":  "structure",
+  "/note/mysql/":  "structure",
   "/note/redis/":  "structure",
-  "/note/Linux/":  "structure",
+  "/note/mq/":  "structure",
+  "/note/es/":  "structure",
+  "/note/kafka/":  "structure",
+  "/note/linux/":  "structure",
+  "/note/go/":  "structure",
+  "/note/computernetwork/":  "structure",
   // "/": [
   //   "",
   //   {

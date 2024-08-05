@@ -19,14 +19,39 @@ export default navbar([
         link: 'java/'
       },
       {
-        text: "redis",
+        text: "mysql",
         icon: "pen-to-square",
-        link: 'redis/',
+        link: 'mysql/',
       },
       {
-        text: "redis",
+        text: "mq",
+        icon: "pen-to-square",
+        link: 'mq/',
+      },
+      {
+        text: "es",
+        icon: "pen-to-square",
+        link: 'es/',
+      },
+      {
+        text: "kafka",
+        icon: "pen-to-square",
+        link: 'kafka/',
+      },
+      {
+        text: "linux",
         icon: "pen-to-square",
         link: 'Linux/',
+      },
+      {
+        text: "go",
+        icon: "pen-to-square",
+        link: 'go/',
+      },
+      {
+        text: "计算机网络",
+        icon: "pen-to-square",
+        link: 'computernetwork/',
       },
     ],
   }
